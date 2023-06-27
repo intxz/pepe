@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            button6 = new Button();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -45,6 +47,7 @@
             button3 = new Button();
             button4 = new Button();
             dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
@@ -58,6 +61,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 192, 255);
+            panel1.Controls.Add(button6);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
@@ -68,6 +72,21 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(252, 450);
             panel1.TabIndex = 0;
+            // 
+            // button6
+            // 
+            button6.FlatAppearance.BorderSize = 0;
+            button6.FlatAppearance.MouseDownBackColor = Color.LightCoral;
+            button6.FlatAppearance.MouseOverBackColor = Color.Red;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button6.Location = new Point(63, 191);
+            button6.Name = "button6";
+            button6.Size = new Size(105, 37);
+            button6.TabIndex = 18;
+            button6.Text = "RENDICIÓN";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // label4
             // 
@@ -130,6 +149,16 @@
             label6.TabIndex = 11;
             label6.Text = "label6";
             // 
+            // timer1
+            // 
+            timer1.Interval = 5000;
+            timer1.Tick += timer1_Tick_1;
+            // 
+            // timer2
+            // 
+            timer2.Interval = 5000;
+            timer2.Tick += timer2_Tick_1;
+            // 
             // button1
             // 
             button1.FlatAppearance.BorderSize = 0;
@@ -171,6 +200,7 @@
             richTextBox1.Size = new Size(250, 139);
             richTextBox1.TabIndex = 3;
             richTextBox1.Text = "";
+            richTextBox1.KeyPress += richTextBox1_KeyPress;
             // 
             // button5
             // 
@@ -201,6 +231,7 @@
             button3.Text = "¡JUEGATELA!";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
+            button3.KeyPress += button3_KeyPress;
             // 
             // button4
             // 
@@ -220,12 +251,26 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(551, 12);
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1 });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.Location = new Point(665, 1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(245, 251);
+            dataGridView1.Size = new Size(136, 251);
             dataGridView1.TabIndex = 9;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellClick += dataGridView1_CellClick_1;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Preguntas";
+            Column1.Name = "Column1";
             // 
             // label7
             // 
@@ -341,5 +386,7 @@
         private Label label10;
         private Label label11;
         private Label numform;
+        private DataGridViewTextBoxColumn Column1;
+        private Button button6;
     }
 }

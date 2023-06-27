@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Collections;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace cliente
 {
@@ -19,11 +20,19 @@ namespace cliente
         Socket serv;
         Thread Atender;
 
+       
+
         delegate void DelegadoParaEscribir(string mensaje);
         delegate void DelegadoParaTablaConectados(string[] trozos);
         delegate void DelegadoParaCerrarForm();
 
-        int puerto = 50095;
+        int puerto = 50092;
+
+        int conr = 0;
+        int nx = 1;
+        int lx = 2;
+
+        Form3 f3;
 
         public Form1()
         {
@@ -36,6 +45,7 @@ namespace cliente
             tB_email.Hide();
             panel4.Hide();
             lbl_iniciado.Hide();
+            button1.Visible = false;
             dgv_conectados.ColumnCount = 2;
             dgv_conectados.Columns[0].HeaderText = "Usuario";
             dgv_conectados.Columns[1].HeaderText = "Invitar";
@@ -79,6 +89,7 @@ namespace cliente
 
         private void AtenderServidor()
         {
+            
             while (true)
             {
                 //if (serv.Connected == false)
@@ -189,6 +200,7 @@ namespace cliente
                                 string resp = "9/" + trozos[2] + "/SI/" + tB_nombre.Text + "/" + trozos[1];
                                 MessageBox.Show(resp);
                                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(resp);
+                                nx = 1;
                                 serv.Send(msg);
                             }
                             if (pregunta == DialogResult.No)
@@ -205,12 +217,18 @@ namespace cliente
                         {
                             string a = "Informacion para el host: " + trozos[3] + " se ha unido correctamente a tu partida";
                             MessageBox.Show(a, tB_nombre.Text);
+                            ////ThreadStart ts = delegate { GoForm(); };
+                            ////Thread t = new Thread(ts);
+                            ////t.Start();
 
                         }
                         else if (trozos[1] == "OK" && trozos[2] != tB_nombre.Text)
                         {
                             string a = "Informacion para " + trozos[3] + ", te has unido correctamente a la partida de " + trozos[2];
                             MessageBox.Show(a, tB_nombre.Text);
+                            //ThreadStart ts = delegate { GoForm(); };
+                            //Thread t = new Thread(ts);
+                            //t.Start();
 
                         }
                         else if (trozos[1] == "KO" && trozos[2] == tB_nombre.Text)
@@ -224,6 +242,88 @@ namespace cliente
                             MessageBox.Show(a, tB_nombre.Text);
                         }
                         break;
+                    case 11:
+                        Invoke(new Action(() =>
+                        {
+                            if (forms.Count == 1)
+                            {
+                                forms[1].RecibirCarta(mensaje);
+                            }
+                            else if (forms.Count == 2)
+                            {
+                                forms[1].RecibirCarta(mensaje);
+                                forms[2].RecibirCarta(mensaje);
+                            }
+                            else if (forms.Count == 3)
+                            {
+                                forms[1].RecibirCarta(mensaje);
+                                forms[2].RecibirCarta(mensaje);
+                                forms[3].RecibirCarta(mensaje);
+
+                            }
+
+                        }));                       
+                        break;
+                    case 12:
+                        Invoke(new Action(() =>
+                        {
+                            forms[0].RecibirPista(mensaje);
+                        }));
+                        break;
+                        case 13:
+                        Invoke(new Action(() =>
+                        {
+                            if (forms.Count == 1)
+                            {
+                                forms[1].RecibirYesNo(mensaje);
+                            }
+                            else if (forms.Count == 2)
+                            {
+                                forms[1].RecibirYesNo(mensaje);
+                                forms[2].RecibirYesNo(mensaje);
+                            }
+                            else if (forms.Count == 3)
+                            {
+                                forms[1].RecibirYesNo(mensaje);
+                                forms[2].RecibirYesNo(mensaje);
+                                forms[3].RecibirYesNo(mensaje);
+
+                            }
+                        }));
+                        break;
+                    case 14:
+                        Invoke(new Action(() =>
+                        {
+                            if (forms.Count == 1)
+                            {
+                                forms[1].RecibirDescripcion(mensaje);
+                            }
+                            else if (forms.Count == 2)
+                            {
+                                forms[1].RecibirDescripcion(mensaje);
+                                forms[2].RecibirDescripcion(mensaje);
+                            }
+                            else if (forms.Count == 3)
+                            {
+                                forms[1].RecibirDescripcion(mensaje);
+                                forms[2].RecibirDescripcion(mensaje);
+                                forms[3].RecibirDescripcion(mensaje);
+
+                            }
+
+                        }));
+                        break;
+                    case 15:
+                        Invoke(new Action(() =>
+                        {
+                            if (forms.Count ==1)
+                            {
+                                forms[0].RecibirVictoria(mensaje);
+                            }
+                            
+                        }));
+                        break;
+
 
                 }
             }
@@ -248,6 +348,7 @@ namespace cliente
 
         private void btn_Iniciar_Click(object sender, EventArgs e)
         {
+
             IPAddress direc = IPAddress.Parse("192.168.56.102");
             IPEndPoint ipep = new IPEndPoint(direc, puerto);
             serv = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -262,6 +363,7 @@ namespace cliente
                 {
                     serv.Connect(ipep);
                     //MessageBox.Show("Conexión de socket establecida");
+
                 }
                 catch (SocketException)
                 {
@@ -269,6 +371,11 @@ namespace cliente
                     return;
                 }
 
+
+
+
+                btn_Iniciar.Visible = false;
+                button1.Visible = true;
                 ThreadStart ts = delegate { AtenderServidor(); };
                 Atender = new Thread(ts);
                 Atender.Start();
@@ -291,6 +398,7 @@ namespace cliente
             //serv.Close();
             //Atender.Abort();
             this.Close();
+
         }
         private void btn_enviar_Click(object sender, EventArgs e)
         {
@@ -333,6 +441,7 @@ namespace cliente
             string dest2 = "";
             string dest3 = "";
             string reg;
+            nx = 0;
             foreach (DataGridViewRow row in dgv_conectados.Rows)
             {
                 if (Convert.ToBoolean(row.Cells[1].Value))
@@ -542,19 +651,42 @@ namespace cliente
 
         }
         List<Form3> forms = new List<Form3>();
+        
         private void GoForm()
         {
             int cont = forms.Count;
-            Form3 f3 = new Form3(cont, serv);
-            f3.ShowDialog();
+            f3 = new Form3(lx, serv, nx,cont);
             forms.Add(f3);
+            f3.ShowDialog();
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+       
+
+        private void dgv_conectados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+            conr++;
             ThreadStart ts = delegate { GoForm(); };
             Thread t = new Thread(ts);
             t.Start();
+            if (conr == 1)
+            {
+                lx = 0;
+            }
+            else if (conr ==2 || conr == 3 || conr == 4) 
+            {
+                lx = 1;
+            }
+            else
+            {
+                MessageBox.Show("Ya basta con el botoncín");
+            }
         }
     }
 }

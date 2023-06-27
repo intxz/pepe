@@ -47,6 +47,7 @@
             lbl_iniciado = new Label();
             cbx_existe = new CheckBox();
             panel1 = new Panel();
+            button1 = new Button();
             linkLabel2 = new LinkLabel();
             label1 = new Label();
             linkLabel1 = new LinkLabel();
@@ -54,7 +55,6 @@
             panel3 = new Panel();
             panel2 = new Panel();
             panel5 = new Panel();
-            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_conectados).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -120,7 +120,7 @@
             btn_Iniciar.Name = "btn_Iniciar";
             btn_Iniciar.Size = new Size(163, 38);
             btn_Iniciar.TabIndex = 7;
-            btn_Iniciar.Text = "INICIAR JUEGO";
+            btn_Iniciar.Text = "INICIAR SESIÓN";
             btn_Iniciar.UseVisualStyleBackColor = false;
             btn_Iniciar.Click += btn_Iniciar_Click;
             // 
@@ -150,6 +150,7 @@
             dgv_conectados.RowTemplate.Height = 33;
             dgv_conectados.Size = new Size(270, 150);
             dgv_conectados.TabIndex = 10;
+            dgv_conectados.CellContentClick += dgv_conectados_CellContentClick;
             // 
             // lbl_conectados
             // 
@@ -296,12 +297,12 @@
             // 
             lbl_iniciado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbl_iniciado.AutoSize = true;
-            lbl_iniciado.Font = new Font("Century", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_iniciado.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbl_iniciado.ForeColor = Color.DeepPink;
             lbl_iniciado.Location = new Point(750, 26);
             lbl_iniciado.Margin = new Padding(2, 0, 2, 0);
             lbl_iniciado.Name = "lbl_iniciado";
-            lbl_iniciado.Size = new Size(92, 33);
+            lbl_iniciado.Size = new Size(96, 33);
             lbl_iniciado.TabIndex = 23;
             lbl_iniciado.Text = "label1";
             lbl_iniciado.TextAlign = ContentAlignment.MiddleRight;
@@ -324,6 +325,7 @@
             // panel1
             // 
             panel1.BackColor = Color.DeepPink;
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(linkLabel2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(linkLabel1);
@@ -340,6 +342,24 @@
             panel1.Size = new Size(322, 332);
             panel1.TabIndex = 26;
             panel1.Paint += panel1_Paint;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.PaleVioletRed;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.LightPink;
+            button1.FlatAppearance.MouseOverBackColor = Color.Pink;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = Color.FromArgb(15, 15, 15);
+            button1.Location = new Point(73, 212);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(163, 38);
+            button1.TabIndex = 28;
+            button1.Text = "INICIAR JUEGO";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
             // 
             // linkLabel2
             // 
@@ -416,23 +436,12 @@
             panel5.Size = new Size(98, 2);
             panel5.TabIndex = 27;
             // 
-            // button1
-            // 
-            button1.Location = new Point(670, 298);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 28;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 15, 15);
             ClientSize = new Size(939, 332);
-            Controls.Add(button1);
             Controls.Add(panel5);
             Controls.Add(cbx_existe);
             Controls.Add(lbl_iniciado);

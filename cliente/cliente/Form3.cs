@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Xml.Linq;
 
 namespace cliente
 {
@@ -17,16 +18,22 @@ namespace cliente
     {
         int nform;
         Socket server;
+        int nx;
+        int cont;
 
-        public Form3(int nf, Socket serv)
+        public Form3(int nf, Socket serv, int nx, int cont)
         {
             InitializeComponent();
             this.nform = nf;
             this.server = serv;
+            this.nx = nx;
+            this.cont = cont;
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            //MessageBox.Show(Convert.ToString(cont));
+            
             numform.Text = nform.ToString();
             label1.Visible = false;
             label2.Visible = false;
@@ -38,18 +45,19 @@ namespace cliente
             button5.Visible = false;
             richTextBox1.Visible = false;
             dataGridView1.Visible = false;
+            button6.Visible = false;
             //label7.Visible = false;
             //label8.Visible = false;
             //label9.Visible = false;
             //label10.Visible = false;
-            if (numform.Text == "0")
+            if ((numform.Text == "0") || nx == 0)
             {
                 button1.Visible = true;
                 button4.Visible = false;
                 label11.ForeColor = Color.SeaGreen;
                 panel1.BackColor = Color.SeaGreen;
             }
-            else if (numform.Text == "1")
+            else if ((numform.Text == "1") || (nx == 1))
             {
                 button1.Visible = false;
                 button4.Visible = true;
@@ -75,25 +83,22 @@ namespace cliente
             //MessageBox.Show(trozos[1]);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Start();
-            //Random rnd1 = new Random();
-            //int numero1 = rnd1.Next(0, 50);
-            int numero1 = 0;
-            if (numero1 == 0) //YO CAMBIARIA ESTA CARTA 
+            Random rnd1 = new Random();
+            int numero1 = rnd1.Next(0, 50);
+            //int numero1 = 0;
+            if (numero1 == 0)
             {
-                label1.Text = "PEPE"; // PERSONA
-                label2.Text = "PACO"; // NOMBRE
-                label3.Text = "MIGUEL"; // HUMANO
-                label4.Text = "KAKASHI"; // MUNDO
+                label1.Text = "TECLADO";
+                label2.Text = "ORDENADOR";
+                label3.Text = "LETRAS";
+                label4.Text = "CARACTERES";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -104,7 +109,7 @@ namespace cliente
                 label3.Text = "HOMBRE";
                 label4.Text = "HIJO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -115,7 +120,7 @@ namespace cliente
                 label3.Text = "DORMIR";
                 label4.Text = "COLGAR";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -126,7 +131,7 @@ namespace cliente
                 label3.Text = "SALIR";
                 label4.Text = "DISFRAZ";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -137,7 +142,7 @@ namespace cliente
                 label3.Text = "MANO";
                 label4.Text = "TOCAR";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -148,7 +153,7 @@ namespace cliente
                 label3.Text = "MEDICINA";
                 label4.Text = "ANESTESIA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -159,7 +164,7 @@ namespace cliente
                 label3.Text = "FRIO";
                 label4.Text = "NARIZ";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -170,7 +175,7 @@ namespace cliente
                 label3.Text = "BLUSA";
                 label4.Text = "VESTIDO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -181,7 +186,7 @@ namespace cliente
                 label3.Text = "PADRES";
                 label4.Text = "VOLUNTAD";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -192,7 +197,7 @@ namespace cliente
                 label3.Text = "SUR";
                 label4.Text = "LANCHA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -203,7 +208,7 @@ namespace cliente
                 label3.Text = "FORMA";
                 label4.Text = "PUNTOS";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -214,7 +219,7 @@ namespace cliente
                 label3.Text = "ROPA";
                 label4.Text = "TOP";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -225,7 +230,7 @@ namespace cliente
                 label3.Text = "DIVISA";
                 label4.Text = "LIBRA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -236,7 +241,7 @@ namespace cliente
                 label3.Text = "ENTRADA";
                 label4.Text = "BOLETO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -247,7 +252,7 @@ namespace cliente
                 label3.Text = "DECIR";
                 label4.Text = "IDIOMA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -258,7 +263,7 @@ namespace cliente
                 label3.Text = "MAR";
                 label4.Text = "CUIDAD";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -269,7 +274,7 @@ namespace cliente
                 label3.Text = "PELEA";
                 label4.Text = "EJERCITO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -280,7 +285,7 @@ namespace cliente
                 label3.Text = "SETA";
                 label4.Text = "JABALI";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -291,7 +296,7 @@ namespace cliente
                 label3.Text = "SEVILLA";
                 label4.Text = "IGLESIA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -302,7 +307,7 @@ namespace cliente
                 label3.Text = "CHICA";
                 label4.Text = "BEBE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -313,7 +318,7 @@ namespace cliente
                 label3.Text = "IMBECIL";
                 label4.Text = "INSULTO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -324,7 +329,7 @@ namespace cliente
                 label3.Text = "HABLAR";
                 label4.Text = "CHARLA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -335,7 +340,7 @@ namespace cliente
                 label3.Text = "FAVORITO";
                 label4.Text = "OPONENTE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -346,7 +351,7 @@ namespace cliente
                 label3.Text = "JUEGO";
                 label4.Text = "MESA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -357,7 +362,7 @@ namespace cliente
                 label3.Text = "VAMPIRO";
                 label4.Text = "MATAR";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -368,7 +373,7 @@ namespace cliente
                 label3.Text = "ESTADIO";
                 label4.Text = "AFICIONADOS";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -379,7 +384,7 @@ namespace cliente
                 label3.Text = "RUTA";
                 label4.Text = "COCHE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -390,7 +395,7 @@ namespace cliente
                 label3.Text = "CABAÑA";
                 label4.Text = "INESTABLE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -401,7 +406,7 @@ namespace cliente
                 label3.Text = "EVALUAR";
                 label4.Text = "ESCUELA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -412,7 +417,7 @@ namespace cliente
                 label3.Text = "PUERTA";
                 label4.Text = "VALLA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -423,7 +428,7 @@ namespace cliente
                 label3.Text = "ESPOSO";
                 label4.Text = "PADRES";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -434,7 +439,7 @@ namespace cliente
                 label3.Text = "INCREMENTAR";
                 label4.Text = "SUPERIOR";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -445,7 +450,7 @@ namespace cliente
                 label3.Text = "RESTAURANTE";
                 label4.Text = "COMIDA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -456,7 +461,7 @@ namespace cliente
                 label3.Text = "BEBER";
                 label4.Text = "AIRE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -467,7 +472,7 @@ namespace cliente
                 label3.Text = "CARRETERA";
                 label4.Text = "ENCONTRAR";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -478,7 +483,7 @@ namespace cliente
                 label3.Text = "LUZ";
                 label4.Text = "INTERRUPTOR";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -489,7 +494,7 @@ namespace cliente
                 label3.Text = "AVENIDA";
                 label4.Text = "DIRECCION";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -500,7 +505,7 @@ namespace cliente
                 label3.Text = "ENFADO";
                 label4.Text = "CALMA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -511,7 +516,7 @@ namespace cliente
                 label3.Text = "TEÑIR";
                 label4.Text = "PELUCA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -522,7 +527,7 @@ namespace cliente
                 label3.Text = "PEGAR";
                 label4.Text = "CASETE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -533,7 +538,7 @@ namespace cliente
                 label3.Text = "COMIDA";
                 label4.Text = "CHICLE";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -544,7 +549,7 @@ namespace cliente
                 label3.Text = "FUTURO";
                 label4.Text = "ZODIACO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -555,7 +560,7 @@ namespace cliente
                 label3.Text = "MAR";
                 label4.Text = "COLISEO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -566,7 +571,7 @@ namespace cliente
                 label3.Text = "ENORME";
                 label4.Text = "PEQUEÑO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -577,7 +582,7 @@ namespace cliente
                 label3.Text = "ACCIDENTE";
                 label4.Text = "CORRECTO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -588,7 +593,7 @@ namespace cliente
                 label3.Text = "AMARILLO";
                 label4.Text = "CANARIAS";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -599,7 +604,7 @@ namespace cliente
                 label3.Text = "FRANCES";
                 label4.Text = "COMER";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -610,7 +615,7 @@ namespace cliente
                 label3.Text = "VEHICULO";
                 label4.Text = "PARAMEDICO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -621,7 +626,7 @@ namespace cliente
                 label3.Text = "NOTICIAS";
                 label4.Text = "ARTICULO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -632,7 +637,7 @@ namespace cliente
                 label3.Text = "AGUA";
                 label4.Text = "PISCINA";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -643,15 +648,17 @@ namespace cliente
                 label3.Text = "CURA";
                 label4.Text = "REMEDIO";
                 button1.Enabled = false;
-                string env = "11/" + nform + "/" + label1.Text + "/" + label2.Text + "/" + label3.Text + "/" + label4.Text;
+                string env = "11/" + label1.Text + "-" + label2.Text + "-" + label3.Text + "-" + label4.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
             button1.Visible = false;
+            button2.Visible = true;
             label1.Visible = true;
             label2.Visible = true;
             label3.Visible = true;
-            label4.Visible = true;         
+            richTextBox1.Visible = true;
+            label4.Visible = true;
             dataGridView1.Visible = true;
 
         }
@@ -685,7 +692,7 @@ namespace cliente
             }
             else if (x == 0) //envia la descrpcion
             {
-                string env = "14/" + nform + "/" + richTextBox1.Text;
+                string env = "14/" + richTextBox1.Text;
                 byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
                 server.Send(msg);
             }
@@ -699,18 +706,12 @@ namespace cliente
             richTextBox1.Clear();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            label2.Visible = false;
-            label3.Visible = false;
-            label4.Visible = false;
-            richTextBox1.Visible = true;
-            button2.Visible = true;
-            timer1.Stop();
-        }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
+            int z = 0;
+            z++;
             string text = richTextBox1.Text;
             string[] trozos = text.Split();
             int x = 0;
@@ -756,14 +757,106 @@ namespace cliente
                 int y = Convert.ToInt32(label6.Text);
                 y = y + 3;
                 label6.Text = Convert.ToString(y);
-                button1.Enabled = true;
-                label11.Text = "Te toca preguntar";
-                label11.BackColor = Color.Green;
+                string env = "15/";
+                byte[] msg = Encoding.UTF8.GetBytes(env);
+                server.Send(msg);
+
+            }
+            else if (z == 5)
+            {
+                button6.Visible = true;
             }
 
             richTextBox1.Clear();
         }
-        private void timer2_Tick(object sender, EventArgs e)
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string env = "12/" + richTextBox1.Text;
+            byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
+            server.Send(msg);
+            button3.Enabled = true;
+            button5.Enabled = false;
+        }
+
+        public void RecibirCarta(string mesaje)
+        {
+            Invoke(new Action(() =>
+            {
+
+                string[] trozos = mesaje.Split('/');
+                string mesaje1 = trozos[1];
+                string[] trozos1 = mesaje1.Split('-');
+                label7.Text = trozos1[0];
+                label8.Text = trozos1[1];
+                label9.Text = trozos1[2];
+                label10.Text = trozos1[3];
+
+
+
+            }));
+
+
+        }
+
+        public void RecibirPista(string mesaje)
+        {
+            Invoke(new Action(() =>
+            {
+
+
+                string[] trozos = mesaje.Split('/');
+                int x = dataGridView1.Rows.Add();
+                dataGridView1.Rows[x].Cells[0].Value = trozos[1];
+                richTextBox1.Clear();
+
+
+            }));
+
+        }
+
+        public void RecibirYesNo(string mesaje)
+        {
+            Invoke(new Action(() =>
+            {
+
+                string[] trozos = mesaje.Split('/');
+                if (trozos[1] == "SI")
+                {
+                    MessageBox.Show("La respuesta a tu pista es SI");
+                }
+                if (trozos[1] == "NO")
+                {
+                    MessageBox.Show("La respuesta a tu pista es NO");
+                }
+
+            }));
+
+
+        }
+
+        public void RecibirDescripcion(string mesaje)
+        {
+            Invoke(new Action(() =>
+            {
+                string[] trozos = mesaje.Split('/');
+                MessageBox.Show(trozos[1]);
+            }));
+
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            richTextBox1.Visible = true;
+            button2.Visible = true;
+            timer1.Stop();
+        }
+
+        private void timer2_Tick_1(object sender, EventArgs e)
         {
             button3.Visible = true;
             button5.Visible = true;
@@ -774,64 +867,65 @@ namespace cliente
             MessageBox.Show("Pide una pista");
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            string env = "12/" + nform + "/" + richTextBox1.Text;
-            byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
-            server.Send(msg);
-            button3.Enabled = true;
-            button5.Enabled = false;
-        }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             int z = e.RowIndex;
             string rec = (string)dataGridView1.Rows[z].Cells[0].Value;
             DialogResult x = MessageBox.Show(rec, "PISTA", MessageBoxButtons.YesNo);
-            if (x == DialogResult.Yes)
+            Invoke(new Action(() =>
             {
-                string env = "13/" + nform + "SI";
-                byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
-                server.Send(msg);
-            }
-            else
-            {
-                string env = "13/" + nform + "NO";
-                byte[] msg = System.Text.Encoding.UTF8.GetBytes(env);
-                server.Send(msg);
-            }
-        }
-        public void RecibirCarta(string mesaje)
-        {
-            string[] trozos = mesaje.Split('/');
-            trozos[0] = label7.Text;
-            trozos[1] = label8.Text;
-            trozos[2] = label9.Text;
-            trozos[3] = label10.Text;
+                if (x == DialogResult.Yes)
+                {
+                    string env = "13/" + "SI";
+                    byte[] msg = Encoding.UTF8.GetBytes(env);
+                    server.Send(msg);
+                }
+                else
+                {
+                    string env = "13/" + "NO";
+                    byte[] msg = Encoding.UTF8.GetBytes(env);
+                    server.Send(msg);
+                }
+            }));
         }
 
-        public void RecibirPista(string mesaje)
+        private void button6_Click(object sender, EventArgs e)
         {
-            int x = dataGridView1.Rows.Add();
-            dataGridView1.Rows[x].Cells[0].Value = mesaje;
-            richTextBox1.Clear();
+            string env = "15/";
+            byte[] msg = Encoding.UTF8.GetBytes(env);
+            server.Send(msg);
+            button3.Visible = false;
+            button5.Visible = false;
+            MessageBox.Show("Perdedor");
         }
-
-        public void RecibirYesNo(string mesaje)
+        public void RecibirVictoria(string mesaje)
         {
-            if (mesaje == "SI")
+            Invoke(new Action(() =>
             {
-                MessageBox.Show("La respuesta a tu pista es SI");
-            }
-            if (mesaje == "NO")
-            {
-                MessageBox.Show("La respuesta a tu pista es NO");
-            }
+                MessageBox.Show("Ganaste");
+                Close();
+            }));
 
         }
 
-        public void RecibirDescripcion(string mesaje)
+        private void button3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            MessageBox.Show(mesaje);
+
+        }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+                if (!Char.IsUpper(e.KeyChar))
+                {
+                    e.KeyChar = Char.ToUpper(e.KeyChar);
+                }
+            }
+            else if (!Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 

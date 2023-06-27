@@ -815,9 +815,25 @@ void *AtenderCliente (void *socket)
 			pthread_mutex_unlock( &mutex);
 			notificar=1; 
 		}
+		else if (codigo == 11){
+			
+			sprintf(respuesta, "11/%s",p);
+			
+		}
+		else if (codigo == 12){
+			
+			sprintf(respuesta, "12/%s",p);
+			
+		}
+		else if(codigo == 13){
+			sprintf(respuesta,"13/%s",p);
+		}
+		else if( codigo == 14){
+			sprintf(respuesta,"14/%s",p);
+		}
    	 
 		printf("Respuesta: %s \n", respuesta);
-		if ((codigo ==1)||(codigo==2)|| (codigo==3)||(codigo==4)|| (codigo==5)|| (codigo==6) || (codigo ==7) || (codigo==20) || (codigo==40))
+		if ((codigo ==1)||(codigo==2)|| (codigo==3)||(codigo==4)|| (codigo==5)|| (codigo==6) || (codigo ==7) || (codigo==20) || (codigo==40) ||(codigo ==11) || (codigo ==12) || (codigo == 14) || (codigo ==13))
 		{
 			printf("Socket por el que se enviara: %d \n", sock_conn);
 			write (sock_conn, respuesta, strlen(respuesta));
@@ -862,6 +878,7 @@ void *AtenderCliente (void *socket)
 			write (miLista.conectados[posD].socket,respuesta,strlen(respuesta));
 			write (miLista.conectados[posO].socket,respuesta,strlen(respuesta));
 		}
+		
 /*		else if (codigo==999)*/
 /*		{*/
 /*			for (int j=0; j<i;j++)		*///miLista.num
@@ -922,7 +939,7 @@ int main(int argc, char *argv[])
     int sock_conn, sock_listen;
     struct sockaddr_in serv_adr;    
     
-	int puerto =50095;
+	int puerto =50092;
     
     if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		printf("Error creant socket");
