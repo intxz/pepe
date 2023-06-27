@@ -205,11 +205,13 @@ namespace cliente
                         {
                             string a = "Informacion para el host: " + trozos[3] + " se ha unido correctamente a tu partida";
                             MessageBox.Show(a, tB_nombre.Text);
+
                         }
                         else if (trozos[1] == "OK" && trozos[2] != tB_nombre.Text)
                         {
                             string a = "Informacion para " + trozos[3] + ", te has unido correctamente a la partida de " + trozos[2];
                             MessageBox.Show(a, tB_nombre.Text);
+
                         }
                         else if (trozos[1] == "KO" && trozos[2] == tB_nombre.Text)
                         {
@@ -375,20 +377,20 @@ namespace cliente
             }
         }
 
-        private void btn_baja_Click(object sender, EventArgs e)
-        {
-            string popup = "Seguro que deseas darte de baja?";
-            var pregunta = MessageBox.Show(popup, tB_nombre.Text, MessageBoxButtons.YesNo);
-            Invoke(new Action(() =>
-            {
-                if (pregunta == DialogResult.Yes)
-                {
-                    string reg = "20/" + tB_nombre.Text + "/" + tB_contrasena.Text;
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(reg);
-                    serv.Send(msg);
-                }
-            }));
-        }
+        //private void btn_baja_Click(object sender, EventArgs e)
+        //{
+        //    string popup = "Seguro que deseas darte de baja?";
+        //    var pregunta = MessageBox.Show(popup, tB_nombre.Text, MessageBoxButtons.YesNo);
+        //    Invoke(new Action(() =>
+        //    {
+        //        if (pregunta == DialogResult.Yes)
+        //        {
+        //            string reg = "20/" + tB_nombre.Text + "/" + tB_contrasena.Text;
+        //            byte[] msg = System.Text.Encoding.ASCII.GetBytes(reg);
+        //            serv.Send(msg);
+        //        }
+        //    }));
+        //}
 
         private void lbl_nombre_Click(object sender, EventArgs e)
         {
@@ -420,7 +422,7 @@ namespace cliente
 
         }
 
-        //private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        //private void link_1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         //{
         //    tB_email.Show();
 
@@ -513,6 +515,46 @@ namespace cliente
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+        }
+
+        private void lbl_Bienvenido_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel2_Click(object sender, EventArgs e)
+        {
+            string popup = "Seguro que deseas darte de baja?";
+            var pregunta = MessageBox.Show(popup, tB_nombre.Text, MessageBoxButtons.YesNo);
+            Invoke(new Action(() =>
+            {
+                if (pregunta == DialogResult.Yes)
+                {
+                    string reg = "20/" + tB_nombre.Text + "/" + tB_contrasena.Text;
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(reg);
+                    serv.Send(msg);
+                }
+            }));
+        }
+
+        private void lbl_iniciado_Click(object sender, EventArgs e)
+        {
+
+        }
+        List<Form3> forms = new List<Form3>();
+        private void GoForm()
+        {
+            int cont = forms.Count;
+            Form3 f3 = new Form3(cont, serv);
+            f3.ShowDialog();
+            forms.Add(f3);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ThreadStart ts = delegate { GoForm(); };
+            Thread t = new Thread(ts);
+            t.Start();
         }
     }
 }

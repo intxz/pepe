@@ -32,7 +32,6 @@
             tB_contrasena = new TextBox();
             tB_email = new TextBox();
             btn_Iniciar = new Button();
-            btn_Olvidado = new Button();
             lbl_Bienvenido = new Label();
             dgv_conectados = new DataGridView();
             lbl_conectados = new Label();
@@ -46,14 +45,16 @@
             btn_enviar = new Button();
             btn_invitar = new Button();
             lbl_iniciado = new Label();
-            btn_baja = new Button();
             cbx_existe = new CheckBox();
             panel1 = new Panel();
+            linkLabel2 = new LinkLabel();
             label1 = new Label();
             linkLabel1 = new LinkLabel();
             panel4 = new Panel();
             panel3 = new Panel();
             panel2 = new Panel();
+            panel5 = new Panel();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_conectados).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -123,32 +124,26 @@
             btn_Iniciar.UseVisualStyleBackColor = false;
             btn_Iniciar.Click += btn_Iniciar_Click;
             // 
-            // btn_Olvidado
-            // 
-            btn_Olvidado.Location = new Point(56, 303);
-            btn_Olvidado.Margin = new Padding(2);
-            btn_Olvidado.Name = "btn_Olvidado";
-            btn_Olvidado.Size = new Size(204, 20);
-            btn_Olvidado.TabIndex = 8;
-            btn_Olvidado.Text = "He olvidado mi contraseña";
-            btn_Olvidado.UseVisualStyleBackColor = true;
-            btn_Olvidado.Click += btn_Olvidado_Click;
-            // 
             // lbl_Bienvenido
             // 
             lbl_Bienvenido.AutoSize = true;
-            lbl_Bienvenido.Font = new Font("Papyrus", 28F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lbl_Bienvenido.Location = new Point(321, 9);
+            lbl_Bienvenido.BackColor = Color.Transparent;
+            lbl_Bienvenido.Font = new Font("Century Gothic", 48F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            lbl_Bienvenido.ForeColor = Color.DeepPink;
+            lbl_Bienvenido.Location = new Point(430, 1);
             lbl_Bienvenido.Margin = new Padding(2, 0, 2, 0);
             lbl_Bienvenido.Name = "lbl_Bienvenido";
-            lbl_Bienvenido.Size = new Size(178, 60);
+            lbl_Bienvenido.Size = new Size(185, 77);
             lbl_Bienvenido.TabIndex = 9;
             lbl_Bienvenido.Text = "TABÚ";
+            lbl_Bienvenido.Click += lbl_Bienvenido_Click;
             // 
             // dgv_conectados
             // 
+            dgv_conectados.BackgroundColor = Color.FromArgb(15, 15, 15);
             dgv_conectados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_conectados.Location = new Point(388, 121);
+            dgv_conectados.GridColor = SystemColors.ControlDarkDark;
+            dgv_conectados.Location = new Point(392, 119);
             dgv_conectados.Margin = new Padding(2);
             dgv_conectados.Name = "dgv_conectados";
             dgv_conectados.RowHeadersWidth = 62;
@@ -159,81 +154,103 @@
             // lbl_conectados
             // 
             lbl_conectados.AutoSize = true;
-            lbl_conectados.Font = new Font("Bahnschrift SemiBold Condensed", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_conectados.Location = new Point(438, 88);
+            lbl_conectados.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_conectados.ForeColor = Color.DeepPink;
+            lbl_conectados.Location = new Point(430, 90);
             lbl_conectados.Margin = new Padding(2, 0, 2, 0);
             lbl_conectados.Name = "lbl_conectados";
-            lbl_conectados.Size = new Size(165, 17);
+            lbl_conectados.Size = new Size(195, 19);
             lbl_conectados.TabIndex = 11;
-            lbl_conectados.Text = "Usuarios actualmente conectados";
+            lbl_conectados.Text = "USUARIOS CONECTADOS";
             // 
             // btn_salir
             // 
-            btn_salir.Location = new Point(817, 302);
+            btn_salir.FlatAppearance.BorderSize = 0;
+            btn_salir.FlatAppearance.MouseDownBackColor = Color.LightPink;
+            btn_salir.FlatAppearance.MouseOverBackColor = Color.Pink;
+            btn_salir.FlatStyle = FlatStyle.Flat;
+            btn_salir.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_salir.ForeColor = Color.FromArgb(224, 224, 224);
+            btn_salir.Location = new Point(905, 0);
             btn_salir.Margin = new Padding(2);
             btn_salir.Name = "btn_salir";
-            btn_salir.Size = new Size(64, 23);
+            btn_salir.Size = new Size(33, 33);
             btn_salir.TabIndex = 12;
-            btn_salir.Text = "Salir";
+            btn_salir.Text = "X";
             btn_salir.UseVisualStyleBackColor = true;
             btn_salir.Click += btn_salir_Click;
             // 
             // lbl_peticiones
             // 
             lbl_peticiones.AutoSize = true;
-            lbl_peticiones.Font = new Font("Bahnschrift SemiBold Condensed", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_peticiones.Location = new Point(729, 90);
+            lbl_peticiones.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_peticiones.ForeColor = Color.DeepPink;
+            lbl_peticiones.Location = new Point(719, 90);
             lbl_peticiones.Margin = new Padding(2, 0, 2, 0);
             lbl_peticiones.Name = "lbl_peticiones";
-            lbl_peticiones.Size = new Size(54, 17);
+            lbl_peticiones.Size = new Size(79, 17);
             lbl_peticiones.TabIndex = 13;
-            lbl_peticiones.Text = "Peticiones";
+            lbl_peticiones.Text = "PETICIONES";
             // 
             // cbx_ganadas
             // 
             cbx_ganadas.AutoSize = true;
+            cbx_ganadas.FlatStyle = FlatStyle.Flat;
+            cbx_ganadas.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_ganadas.ForeColor = Color.DeepPink;
             cbx_ganadas.Location = new Point(709, 119);
             cbx_ganadas.Margin = new Padding(2);
             cbx_ganadas.Name = "cbx_ganadas";
-            cbx_ganadas.Size = new Size(143, 19);
+            cbx_ganadas.Size = new Size(187, 21);
             cbx_ganadas.TabIndex = 15;
-            cbx_ganadas.Text = "Partidas ganadas de ...";
+            cbx_ganadas.Text = "PARTIDAS GANADAS DE ...";
             cbx_ganadas.UseVisualStyleBackColor = true;
             // 
             // cbx_jugadas
             // 
             cbx_jugadas.AutoSize = true;
+            cbx_jugadas.FlatStyle = FlatStyle.Flat;
+            cbx_jugadas.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_jugadas.ForeColor = Color.DeepPink;
             cbx_jugadas.Location = new Point(709, 140);
             cbx_jugadas.Margin = new Padding(2);
             cbx_jugadas.Name = "cbx_jugadas";
-            cbx_jugadas.Size = new Size(140, 19);
+            cbx_jugadas.Size = new Size(178, 21);
             cbx_jugadas.TabIndex = 16;
-            cbx_jugadas.Text = "Partidas jugadas de ...";
+            cbx_jugadas.Text = "PARTIDAS JUGADAS DE...";
             cbx_jugadas.UseVisualStyleBackColor = true;
             // 
             // cbx_ganador
             // 
             cbx_ganador.AutoSize = true;
+            cbx_ganador.FlatStyle = FlatStyle.Flat;
+            cbx_ganador.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_ganador.ForeColor = Color.DeepPink;
             cbx_ganador.Location = new Point(709, 212);
             cbx_ganador.Margin = new Padding(2);
             cbx_ganador.Name = "cbx_ganador";
-            cbx_ganador.Size = new Size(156, 19);
+            cbx_ganador.Size = new Size(205, 21);
             cbx_ganador.TabIndex = 17;
-            cbx_ganador.Text = "Jugador con más puntos";
+            cbx_ganador.Text = "JUGADOR CON MÁS PUNTOS";
             cbx_ganador.UseVisualStyleBackColor = true;
             // 
             // tB_peticion
             // 
+            tB_peticion.BackColor = Color.FromArgb(15, 15, 15);
+            tB_peticion.BorderStyle = BorderStyle.None;
+            tB_peticion.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tB_peticion.ForeColor = Color.White;
             tB_peticion.Location = new Point(735, 185);
             tB_peticion.Margin = new Padding(2);
             tB_peticion.Name = "tB_peticion";
-            tB_peticion.Size = new Size(98, 23);
+            tB_peticion.Size = new Size(98, 15);
             tB_peticion.TabIndex = 18;
             // 
             // lbl_contar
             // 
             lbl_contar.BorderStyle = BorderStyle.FixedSingle;
-            lbl_contar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_contar.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_contar.ForeColor = Color.DeepPink;
             lbl_contar.Location = new Point(796, 88);
             lbl_contar.Margin = new Padding(2, 0, 2, 0);
             lbl_contar.Name = "lbl_contar";
@@ -242,81 +259,101 @@
             // 
             // btn_enviar
             // 
-            btn_enviar.Location = new Point(727, 240);
+            btn_enviar.FlatAppearance.BorderSize = 0;
+            btn_enviar.FlatAppearance.MouseDownBackColor = Color.LightPink;
+            btn_enviar.FlatAppearance.MouseOverBackColor = Color.Pink;
+            btn_enviar.FlatStyle = FlatStyle.Flat;
+            btn_enviar.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_enviar.ForeColor = Color.FromArgb(224, 224, 224);
+            btn_enviar.Location = new Point(735, 237);
             btn_enviar.Margin = new Padding(2);
             btn_enviar.Name = "btn_enviar";
             btn_enviar.Size = new Size(120, 29);
             btn_enviar.TabIndex = 20;
-            btn_enviar.Text = "Realizar petición";
+            btn_enviar.Text = "PETICIÓN";
             btn_enviar.UseVisualStyleBackColor = true;
             btn_enviar.Click += btn_enviar_Click;
             // 
             // btn_invitar
             // 
-            btn_invitar.Location = new Point(480, 289);
+            btn_invitar.BackColor = Color.FromArgb(15, 15, 15);
+            btn_invitar.FlatAppearance.BorderSize = 0;
+            btn_invitar.FlatAppearance.MouseDownBackColor = Color.LightPink;
+            btn_invitar.FlatAppearance.MouseOverBackColor = Color.Pink;
+            btn_invitar.FlatStyle = FlatStyle.Flat;
+            btn_invitar.Font = new Font("Century Gothic", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_invitar.ForeColor = Color.FromArgb(224, 224, 224);
+            btn_invitar.Location = new Point(485, 287);
             btn_invitar.Margin = new Padding(2);
             btn_invitar.Name = "btn_invitar";
-            btn_invitar.Size = new Size(90, 20);
+            btn_invitar.Size = new Size(96, 34);
             btn_invitar.TabIndex = 22;
-            btn_invitar.Text = "Invitar";
-            btn_invitar.UseVisualStyleBackColor = true;
+            btn_invitar.Text = "INVITAR";
+            btn_invitar.UseVisualStyleBackColor = false;
             btn_invitar.Click += btn_invitar_Click;
             // 
             // lbl_iniciado
             // 
             lbl_iniciado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbl_iniciado.AutoSize = true;
-            lbl_iniciado.Font = new Font("Perpetua Titling MT", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_iniciado.Location = new Point(774, 13);
+            lbl_iniciado.Font = new Font("Century", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_iniciado.ForeColor = Color.DeepPink;
+            lbl_iniciado.Location = new Point(750, 26);
             lbl_iniciado.Margin = new Padding(2, 0, 2, 0);
             lbl_iniciado.Name = "lbl_iniciado";
-            lbl_iniciado.Size = new Size(98, 32);
+            lbl_iniciado.Size = new Size(92, 33);
             lbl_iniciado.TabIndex = 23;
             lbl_iniciado.Text = "label1";
             lbl_iniciado.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // btn_baja
-            // 
-            btn_baja.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_baja.Location = new Point(762, 45);
-            btn_baja.Margin = new Padding(2);
-            btn_baja.Name = "btn_baja";
-            btn_baja.Size = new Size(108, 19);
-            btn_baja.TabIndex = 24;
-            btn_baja.Text = "Darse de baja";
-            btn_baja.UseVisualStyleBackColor = true;
-            btn_baja.Click += btn_baja_Click;
+            lbl_iniciado.Click += lbl_iniciado_Click;
             // 
             // cbx_existe
             // 
             cbx_existe.AutoSize = true;
+            cbx_existe.FlatStyle = FlatStyle.Flat;
+            cbx_existe.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbx_existe.ForeColor = Color.DeepPink;
             cbx_existe.Location = new Point(709, 161);
             cbx_existe.Margin = new Padding(2);
             cbx_existe.Name = "cbx_existe";
-            cbx_existe.Size = new Size(68, 19);
+            cbx_existe.Size = new Size(76, 21);
             cbx_existe.TabIndex = 25;
-            cbx_existe.Text = "Existe ...";
+            cbx_existe.Text = "EXISTE ...";
             cbx_existe.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
             panel1.BackColor = Color.DeepPink;
+            panel1.Controls.Add(linkLabel2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(btn_Iniciar);
-            panel1.Controls.Add(btn_Olvidado);
             panel1.Controls.Add(tB_nombre);
             panel1.Controls.Add(tB_contrasena);
             panel1.Controls.Add(tB_email);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(367, 332);
+            panel1.Size = new Size(322, 332);
             panel1.TabIndex = 26;
             panel1.Paint += panel1_Paint;
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.ActiveLinkColor = Color.FromArgb(15, 15, 15);
+            linkLabel2.AutoSize = true;
+            linkLabel2.Font = new Font("Century Gothic", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            linkLabel2.LinkColor = Color.Silver;
+            linkLabel2.Location = new Point(103, 294);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(120, 20);
+            linkLabel2.TabIndex = 14;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Eliminar cuenta";
+            linkLabel2.Click += linkLabel2_Click;
             // 
             // label1
             // 
@@ -371,14 +408,33 @@
             panel2.TabIndex = 9;
             panel2.Paint += panel2_Paint;
             // 
+            // panel5
+            // 
+            panel5.BackColor = Color.DeepPink;
+            panel5.Location = new Point(735, 205);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(98, 2);
+            panel5.TabIndex = 27;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(670, 298);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 28;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 15, 15);
-            ClientSize = new Size(888, 332);
+            ClientSize = new Size(939, 332);
+            Controls.Add(button1);
+            Controls.Add(panel5);
             Controls.Add(cbx_existe);
-            Controls.Add(btn_baja);
             Controls.Add(lbl_iniciado);
             Controls.Add(btn_invitar);
             Controls.Add(btn_enviar);
@@ -411,7 +467,6 @@
         private TextBox tB_contrasena;
         private TextBox tB_email;
         private Button btn_Iniciar;
-        private Button btn_Olvidado;
         private Label lbl_Bienvenido;
         private DataGridView dgv_conectados;
         private Label lbl_conectados;
@@ -426,7 +481,6 @@
         private Button btn_invitar;
         public TextBox tB_nombre;
         private Label lbl_iniciado;
-        private Button btn_baja;
         private CheckBox cbx_existe;
         private Panel panel1;
         private Panel panel2;
@@ -434,5 +488,8 @@
         private Panel panel3;
         private LinkLabel linkLabel1;
         private Label label1;
+        private LinkLabel linkLabel2;
+        private Panel panel5;
+        private Button button1;
     }
 }
