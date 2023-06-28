@@ -50,14 +50,21 @@ namespace cliente
             //label8.Visible = false;
             //label9.Visible = false;
             //label10.Visible = false;
-            if ((numform.Text == "0") || nx == 0)
+            if ((numform.Text == "0") || nx == 1)
             {
                 button1.Visible = true;
                 button4.Visible = false;
                 label11.ForeColor = Color.SeaGreen;
                 panel1.BackColor = Color.SeaGreen;
             }
-            else if ((numform.Text == "1") || (nx == 1))
+            else if (numform.Text == "1")
+            {
+                button1.Visible = false;
+                button4.Visible = true;
+                label11.ForeColor = Color.Firebrick;
+                panel1.BackColor = Color.Firebrick;
+            }
+            else if ((numform.Text == "0") && (nx==0))
             {
                 button1.Visible = false;
                 button4.Visible = true;
@@ -903,6 +910,15 @@ namespace cliente
             Invoke(new Action(() =>
             {
                 MessageBox.Show("Ganaste");
+                Close();
+            }));
+
+        }
+        public void RecibirRendicion(string mesaje)
+        {
+            Invoke(new Action(() =>
+            {
+                MessageBox.Show("Un jugador se ha rendido");
                 Close();
             }));
 

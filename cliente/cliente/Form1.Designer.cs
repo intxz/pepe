@@ -55,6 +55,7 @@
             panel3 = new Panel();
             panel2 = new Panel();
             panel5 = new Panel();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgv_conectados).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -436,12 +437,22 @@
             panel5.Size = new Size(98, 2);
             panel5.TabIndex = 27;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(649, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 28;
+            label2.Text = "label2";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 15, 15);
             ClientSize = new Size(939, 332);
+            Controls.Add(label2);
             Controls.Add(panel5);
             Controls.Add(cbx_existe);
             Controls.Add(lbl_iniciado);
@@ -500,5 +511,6 @@
         private LinkLabel linkLabel2;
         private Panel panel5;
         private Button button1;
+        private Label label2;
     }
 }

@@ -20,7 +20,7 @@ namespace cliente
         Socket serv;
         Thread Atender;
 
-       
+
 
         delegate void DelegadoParaEscribir(string mensaje);
         delegate void DelegadoParaTablaConectados(string[] trozos);
@@ -29,7 +29,7 @@ namespace cliente
         int puerto = 50092;
 
         int conr = 0;
-        int nx = 1;
+        int nx = 2;
         int lx = 2;
 
         Form3 f3;
@@ -49,7 +49,7 @@ namespace cliente
             dgv_conectados.ColumnCount = 2;
             dgv_conectados.Columns[0].HeaderText = "Usuario";
             dgv_conectados.Columns[1].HeaderText = "Invitar";
-
+            label2.Enabled = false;
         }
 
         public void PonContadorServicios(string texto)
@@ -89,7 +89,7 @@ namespace cliente
 
         private void AtenderServidor()
         {
-            
+
             while (true)
             {
                 //if (serv.Connected == false)
@@ -200,7 +200,7 @@ namespace cliente
                                 string resp = "9/" + trozos[2] + "/SI/" + tB_nombre.Text + "/" + trozos[1];
                                 MessageBox.Show(resp);
                                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(resp);
-                                nx = 1;
+                                nx = 0;
                                 serv.Send(msg);
                             }
                             if (pregunta == DialogResult.No)
@@ -259,18 +259,36 @@ namespace cliente
                                 forms[1].RecibirCarta(mensaje);
                                 forms[2].RecibirCarta(mensaje);
                                 forms[3].RecibirCarta(mensaje);
-
+                            }
+                            else if (nx == 0)
+                            {
+                                forms[0].RecibirCarta(mensaje);
+                            }
+                            else
+                            {
+                                label2.Text = mensaje;
                             }
 
-                        }));                       
+                        }));
                         break;
                     case 12:
                         Invoke(new Action(() =>
                         {
-                            forms[0].RecibirPista(mensaje);
+                            if (forms.Count == 1)
+                            {
+                                forms[0].RecibirPista(mensaje);
+                            }
+                            else if (nx == 1)
+                            {
+                                forms[0].RecibirPista(mensaje);
+                            }
+                            else
+                            {
+                                label2.Text = mensaje;
+                            }
                         }));
                         break;
-                        case 13:
+                    case 13:
                         Invoke(new Action(() =>
                         {
                             if (forms.Count == 1)
@@ -287,8 +305,16 @@ namespace cliente
                                 forms[1].RecibirYesNo(mensaje);
                                 forms[2].RecibirYesNo(mensaje);
                                 forms[3].RecibirYesNo(mensaje);
-
                             }
+                            else if (nx == 0)
+                            {
+                                forms[0].RecibirYesNo(mensaje);
+                            }
+                            else
+                            {
+                                label2.Text = mensaje;
+                            }
+
                         }));
                         break;
                     case 14:
@@ -310,17 +336,33 @@ namespace cliente
                                 forms[3].RecibirDescripcion(mensaje);
 
                             }
+                            else if (nx == 0)
+                            {
+                                forms[0].RecibirDescripcion(mensaje);
+                            }
+                            else
+                            {
+                                label2.Text = mensaje;
+                            }
 
                         }));
                         break;
                     case 15:
                         Invoke(new Action(() =>
                         {
-                            if (forms.Count ==1)
+                            if (forms.Count == 1)
                             {
                                 forms[0].RecibirVictoria(mensaje);
                             }
-                            
+                            else if (nx == 1)
+                            {
+                                forms[0].RecibirVictoria(mensaje);
+                            }
+                            else
+                            {
+                                label2.Text = mensaje;
+                            }
+
                         }));
                         break;
 
@@ -441,7 +483,7 @@ namespace cliente
             string dest2 = "";
             string dest3 = "";
             string reg;
-            nx = 0;
+            nx = 1;
             foreach (DataGridViewRow row in dgv_conectados.Rows)
             {
                 if (Convert.ToBoolean(row.Cells[1].Value))
@@ -651,17 +693,17 @@ namespace cliente
 
         }
         List<Form3> forms = new List<Form3>();
-        
+
         private void GoForm()
         {
             int cont = forms.Count;
-            f3 = new Form3(lx, serv, nx,cont);
+            f3 = new Form3(lx, serv, nx, cont);
             forms.Add(f3);
             f3.ShowDialog();
-            
+
         }
 
-       
+
 
         private void dgv_conectados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -670,7 +712,7 @@ namespace cliente
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+
             conr++;
             ThreadStart ts = delegate { GoForm(); };
             Thread t = new Thread(ts);
@@ -679,7 +721,7 @@ namespace cliente
             {
                 lx = 0;
             }
-            else if (conr ==2 || conr == 3 || conr == 4) 
+            else if (conr == 2 || conr == 3 || conr == 4)
             {
                 lx = 1;
             }

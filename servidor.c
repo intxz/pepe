@@ -831,9 +831,13 @@ void *AtenderCliente (void *socket)
 		else if( codigo == 14){
 			sprintf(respuesta,"14/%s",p);
 		}
+		else if( codigo == 15){
+			sprintf(respuesta,"15/%s",p);
+		}
+
    	 
 		printf("Respuesta: %s \n", respuesta);
-		if ((codigo ==1)||(codigo==2)|| (codigo==3)||(codigo==4)|| (codigo==5)|| (codigo==6) || (codigo ==7) || (codigo==20) || (codigo==40) ||(codigo ==11) || (codigo ==12) || (codigo == 14) || (codigo ==13))
+		if ((codigo ==1)||(codigo==2)|| (codigo==3)||(codigo==4)|| (codigo==5)|| (codigo==6) || (codigo ==7) || (codigo==20) || (codigo==40) ||(codigo ==11) || (codigo ==12) || (codigo == 14) || (codigo ==13)|| (codigo ==15))
 		{
 			printf("Socket por el que se enviara: %d \n", sock_conn);
 			write (sock_conn, respuesta, strlen(respuesta));
